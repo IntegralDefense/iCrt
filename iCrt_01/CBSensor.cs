@@ -203,12 +203,4 @@ namespace iCrt_01
 
     }
 
-    public class RESTResponses
-    {
-        public int session_id { get; set; }
-        public int sensor_id { get; set; }
-        public string status { get; set; }
-
-    }
-
 }

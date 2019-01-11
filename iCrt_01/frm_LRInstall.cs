@@ -21,6 +21,8 @@ namespace iCrt_01
         private static int sessionID { get; set; }
         private static int fileID { get; set; }
         private static string status { get; set; }
+        private static string cmd_status { get; set; }
+        private static int cmd_id { get; set; }
 
         public frm_LRInstall(string Hostname)
         {
@@ -112,7 +114,7 @@ namespace iCrt_01
             lbl_LR_Status.Text = "Disconnected";
         }
 
-        private void bt_Upload_Click(object sender, EventArgs e)
+        private async void bt_Upload_Click(object sender, EventArgs e)
         {
             //Step one is to get the file to the CB server.
             //This needs to be done ASYNC.
@@ -132,31 +134,55 @@ namespace iCrt_01
                 reader.Read(data, 0, (int)reader.Length);
 
                 request.AddFile("file", data, filename);
-                var response = client.Execute<List<CBLRFile>>(request);
-                foreach (CBLRFile item in response.Data)
-                {
-                    fileID = item.id;
-                }
-                //lbl_LR_Status.Text = "Connected, Session ID: " + sessionID.ToString();
+                var response = await client.ExecuteTaskAsync<List<CBLRFile>>(request);
+                //wait for response back from the server that the file uploaded... sadly no progress % returned.
+                if (response.ResponseStatus == ResponseStatus.Completed)
+                    {
+                        foreach (CBLRFile item in response.Data)
+                        {
+                            fileID = item.id;
+                        }
+
+                    }
+                lbl_FS_Status.Text = "File Uploaded to server. File ID:" + fileID;
+                               
             }
+                        
             //If all has gone well we now have a fileID that we can use to PUT the file on the LR machine.
              
             var request_put = new RestRequest(Method.POST);
             request_put.AddHeader("X-Auth-Token", iCrt_01.Properties.Resources.CBApiKey);
             request_put.Resource = "/v1/cblr/session/" + sessionID + "/command";
-            var lrFile = new CBLRCmd();
-            lrFile.name = "put file";
-            lrFile.file_id = fileID;
-            //Lets build a JSON string to upload the file to the LR machine.
-            //This will be made up of three segments, name, file_id and object.
-            //Some super genius at CB named on of the JSON fields "object"
+           
             string name_field = "\"name\":\"put file\"";
             string file_id = String.Format("\"file_id\":\"{0}\"", fileID);
             string object_field = String.Format("\"object\":\"{0}\"", openFileDialog1.SafeFileName);
             string body = "{" + name_field + "," + file_id + "," + object_field + "}";
             request_put.RequestFormat = DataFormat.Json;
             request_put.AddParameter("application/json", body, ParameterType.RequestBody);
-            var response_put = client.Execute(request_put);
+            var response_put = client.Execute<List<CBLRCmd>>(request_put);
+            foreach (CBLRCmd item in response_put.Data)
+            {
+                cmd_status = item.status;
+                cmd_id = item.id;
+            }
+            //The response back from the server is instant in this case but is always "pending"
+            //Need to bug the server while we're waiting for that status to come back.
+            while (cmd_status == "pending")
+            {
+                var request_check = new RestRequest();
+                request_check.AddHeader("X-Auth-Token", iCrt_01.Properties.Resources.CBApiKey);
+                request_check.Resource = "/v1/cblr/session/" + sessionID + "/command";
+                var response_check = client.Execute<List<CBLRCmd>>(request_check);
+                foreach (CBLRCmd item in response_check.Data)
+                {
+                    cmd_status = item.status;
+                    //cmd_id = item.id;
+                }
+            }
+
+            lbl_FS_Status.Text = "File uploaded to endpoint.";
+
         }
     }
 }
