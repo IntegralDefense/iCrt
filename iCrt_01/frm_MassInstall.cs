@@ -19,7 +19,7 @@ namespace iCrt_01
         public frm_MassInstall()
         {
             InitializeComponent();
-            bt_Execute.Enabled = false;
+            //bt_Execute.Enabled = false;
             bt_Check.Enabled = false;
             lbl_Total_Count.Text = totalcount.ToString();
 
