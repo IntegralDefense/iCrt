@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CBApiKey" xml:space="preserve">
-    <value>d4a3f3c881aab460f77db417da3b4658cba2a25f</value>
+    <value />
   </data>
   <data name="CbfileName" xml:space="preserve">
-    <value>CBInstaller.zip</value>
+    <value />
   </data>
   <data name="CBMasServer" xml:space="preserve">
-    <value>https://cbmas.valvoline.com:8443/api</value>
+    <value />
   </data>
   <data name="CBSourceServer" xml:space="preserve">
-    <value>\\nakylexbit201.corp.valvoline.com\ClientInstallers</value>
+    <value />
   </data>
   <data name="CBTaskServer" xml:space="preserve">
-    <value>NAKYLEXCYB205.corp.valvoline.com</value>
+    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="IDEF" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -140,18 +140,18 @@
     <value>..\resources\idef2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CBPSScriptPathandName" xml:space="preserve">
-    <value>C:\Scripts\CBInstall\CB_InstallClient.ps1</value>
+    <value />
   </data>
   <data name="CBSApwd" xml:space="preserve">
-    <value>M0nk3yman9!</value>
+    <value />
   </data>
   <data name="CBserviceAccount" xml:space="preserve">
-    <value>CorpVal\a424902</value>
+    <value />
   </data>
   <data name="LERCServer" xml:space="preserve">
-    <value>\\nakylexbit201.corp.valvoline.com\ClientInstallers</value>
+    <value />
   </data>
   <data name="LERCFileName" xml:space="preserve">
-    <value>lercSetup.msi</value>
+    <value />
   </data>
 </root>

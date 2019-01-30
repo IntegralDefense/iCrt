@@ -19,7 +19,7 @@ namespace iCrt_01.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,7 +61,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to d4a3f3c881aab460f77db417da3b4658cba2a25f.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBApiKey {
             get {
@@ -70,7 +70,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CBInstaller.zip.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CbfileName {
             get {
@@ -79,7 +79,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cbmas.valvoline.com:8443/api.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBMasServer {
             get {
@@ -88,7 +88,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Scripts\CBInstall\CB_InstallClient.ps1.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBPSScriptPathandName {
             get {
@@ -97,7 +97,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to M0nk3yman9!.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBSApwd {
             get {
@@ -106,7 +106,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CorpVal\a424902.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBserviceAccount {
             get {
@@ -115,7 +115,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \\nakylexbit201.corp.valvoline.com\ClientInstallers.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBSourceServer {
             get {
@@ -124,7 +124,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NAKYLEXCYB205.corp.valvoline.com.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string CBTaskServer {
             get {
@@ -153,7 +153,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to lercSetup.msi.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string LERCFileName {
             get {
@@ -162,7 +162,7 @@ namespace iCrt_01.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \\nakylexbit201.corp.valvoline.com\ClientInstallers.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string LERCServer {
             get {
