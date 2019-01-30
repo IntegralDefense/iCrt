@@ -11,6 +11,7 @@ using RestSharp;
 using RestSharp.Deserializers;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace iCrt_01
 {
@@ -67,6 +68,7 @@ namespace iCrt_01
 
                         sessionID = item.id;
                         status = item.status;
+                        lbl_CWD.Text = item.current_working_directory;
                         //answer = item;
                     }
                     lbl_LR_Status.Text = "Connected, Session ID: " + sessionID.ToString();
@@ -90,6 +92,7 @@ namespace iCrt_01
                                 continue;
                             }
                             status = item.status;
+                            lbl_CWD.Text = item.current_working_directory;
                         }
                         //answer = item;
                     }
@@ -147,17 +150,19 @@ namespace iCrt_01
                 lbl_FS_Status.Text = "File Uploaded to server. File ID:" + fileID;
                                
             }
-                        
+
             //If all has gone well we now have a fileID that we can use to PUT the file on the LR machine.
-             
+
+            var put_cmd = new CBLRCmd(); 
             var request_put = new RestRequest(Method.POST);
             request_put.AddHeader("X-Auth-Token", iCrt_01.Properties.Resources.CBApiKey);
             request_put.Resource = "/v1/cblr/session/" + sessionID + "/command";
-           
-            string name_field = "\"name\":\"put file\"";
-            string file_id = String.Format("\"file_id\":\"{0}\"", fileID);
-            string object_field = String.Format("\"object\":\"{0}\"", openFileDialog1.SafeFileName);
-            string body = "{" + name_field + "," + file_id + "," + object_field + "}";
+
+            put_cmd.name = "put file";
+            put_cmd.file_id = fileID;
+            put_cmd._object = openFileDialog1.SafeFileName;
+            
+            string body = JsonConvert.SerializeObject(put_cmd);
             request_put.RequestFormat = DataFormat.Json;
             request_put.AddParameter("application/json", body, ParameterType.RequestBody);
             var response_put = client.Execute<List<CBLRCmd>>(request_put);
@@ -184,5 +189,29 @@ namespace iCrt_01
             lbl_FS_Status.Text = "File uploaded to endpoint.";
 
         }
+
+        private void bt_RunCMD_Click(object sender, EventArgs e)
+        {
+            var client = new RestClient(iCrt_01.Properties.Resources.CBMasServer);
+            var cmd_body = new CBLRCmd();
+            cmd_body.name = "create process";
+            cmd_body._object = tb_CommandLine.Text;
+            //Execute a command using LR REST Api.
+            var request_put = new RestRequest(Method.POST);
+            request_put.AddHeader("X-Auth-Token", iCrt_01.Properties.Resources.CBApiKey);
+            request_put.Resource = "/v1/cblr/session/" + sessionID + "/command";
+
+            var body = JsonConvert.SerializeObject(cmd_body);
+                       
+            request_put.AddParameter("application/json", body, ParameterType.RequestBody);
+            var response_put = client.Execute<List<CBLRCmd>>(request_put);
+            foreach (CBLRCmd item in response_put.Data)
+            {
+                cmd_status = item.status;
+                cmd_id = item.id;
+            }
+
+        }
+
     }
 }

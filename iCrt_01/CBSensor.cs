@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -189,15 +190,23 @@ namespace iCrt_01
 
     public class CBLRCmd
     {
-
+        [JsonProperty(PropertyName = "id")]
         public int id { get; set; } //: id of this command
+        [JsonProperty(PropertyName = "session_id")]
         public int session_id { get; set; } //: the id of the session
+        [JsonProperty(PropertyName = "sensor_id")]
         public int sensor_id { get; set; } //: the sensor id for the session
+        [JsonProperty(PropertyName = "command_timeout")]
         public int command_timeout { get; set; } //: the timeout(in seconds) that the sensor is willing to wait until the command completes.
+        [JsonProperty(PropertyName = "status")]
         public string status { get; set; } //: One of the following: “in progress”, “complete”, “cancel”, “error”
+        [JsonProperty(PropertyName = "name")]
         public string name { get; set; } //: The name of the command(ie “reg set”, “reg query”, “get file”….)
+        [JsonProperty(PropertyName = "object")]
         public string  _object { get; set; } //: the object the command operates on.This is specific to the command but has meaning in a generic way for logging, and display purposes
+        [JsonProperty(PropertyName = "completion_time")]
         public int completion_time { get; set; } //
+        [JsonProperty(PropertyName = "file_id")]
         public int file_id { get; set; } //
 
 

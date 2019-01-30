@@ -10,6 +10,7 @@ using iCrt_01.Model;
 using Microsoft.Win32.TaskScheduler;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace iCrt_01
 {
@@ -506,8 +507,6 @@ namespace iCrt_01
             
             return programs;
         }
-
-       
 
     }
 }

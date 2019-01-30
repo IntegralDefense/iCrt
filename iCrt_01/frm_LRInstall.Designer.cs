@@ -42,6 +42,11 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.lbl_FS_Title = new System.Windows.Forms.Label();
             this.lbl_FS_Status = new System.Windows.Forms.Label();
+            this.tb_CommandLine = new System.Windows.Forms.TextBox();
+            this.lbl_Commandline = new System.Windows.Forms.Label();
+            this.bt_RunCMD = new System.Windows.Forms.Button();
+            this.lbl_CWD_Title = new System.Windows.Forms.Label();
+            this.lbl_CWD = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_CN_Title
@@ -110,7 +115,7 @@
             // 
             // bt_LR_Start
             // 
-            this.bt_LR_Start.Location = new System.Drawing.Point(16, 136);
+            this.bt_LR_Start.Location = new System.Drawing.Point(16, 212);
             this.bt_LR_Start.Name = "bt_LR_Start";
             this.bt_LR_Start.Size = new System.Drawing.Size(95, 23);
             this.bt_LR_Start.TabIndex = 7;
@@ -130,8 +135,8 @@
             // 
             // bt_Upload
             // 
-            this.bt_Upload.Location = new System.Drawing.Point(116, 136);
-            this.bt_Upload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_Upload.Location = new System.Drawing.Point(116, 212);
+            this.bt_Upload.Margin = new System.Windows.Forms.Padding(2);
             this.bt_Upload.Name = "bt_Upload";
             this.bt_Upload.Size = new System.Drawing.Size(84, 23);
             this.bt_Upload.TabIndex = 9;
@@ -146,7 +151,7 @@
             // lbl_FS_Title
             // 
             this.lbl_FS_Title.AutoSize = true;
-            this.lbl_FS_Title.Location = new System.Drawing.Point(12, 56);
+            this.lbl_FS_Title.Location = new System.Drawing.Point(12, 69);
             this.lbl_FS_Title.Name = "lbl_FS_Title";
             this.lbl_FS_Title.Size = new System.Drawing.Size(59, 13);
             this.lbl_FS_Title.TabIndex = 10;
@@ -155,16 +160,65 @@
             // lbl_FS_Status
             // 
             this.lbl_FS_Status.AutoSize = true;
-            this.lbl_FS_Status.Location = new System.Drawing.Point(76, 56);
+            this.lbl_FS_Status.Location = new System.Drawing.Point(76, 69);
             this.lbl_FS_Status.Name = "lbl_FS_Status";
             this.lbl_FS_Status.Size = new System.Drawing.Size(0, 13);
             this.lbl_FS_Status.TabIndex = 11;
+            // 
+            // tb_CommandLine
+            // 
+            this.tb_CommandLine.Location = new System.Drawing.Point(4, 266);
+            this.tb_CommandLine.Name = "tb_CommandLine";
+            this.tb_CommandLine.Size = new System.Drawing.Size(281, 20);
+            this.tb_CommandLine.TabIndex = 12;
+            // 
+            // lbl_Commandline
+            // 
+            this.lbl_Commandline.AutoSize = true;
+            this.lbl_Commandline.Location = new System.Drawing.Point(9, 250);
+            this.lbl_Commandline.Name = "lbl_Commandline";
+            this.lbl_Commandline.Size = new System.Drawing.Size(77, 13);
+            this.lbl_Commandline.TabIndex = 13;
+            this.lbl_Commandline.Text = "Command Line";
+            // 
+            // bt_RunCMD
+            // 
+            this.bt_RunCMD.Location = new System.Drawing.Point(12, 292);
+            this.bt_RunCMD.Name = "bt_RunCMD";
+            this.bt_RunCMD.Size = new System.Drawing.Size(124, 23);
+            this.bt_RunCMD.TabIndex = 14;
+            this.bt_RunCMD.Text = "Execute Command";
+            this.bt_RunCMD.UseVisualStyleBackColor = true;
+            this.bt_RunCMD.Click += new System.EventHandler(this.bt_RunCMD_Click);
+            // 
+            // lbl_CWD_Title
+            // 
+            this.lbl_CWD_Title.AutoSize = true;
+            this.lbl_CWD_Title.Location = new System.Drawing.Point(12, 56);
+            this.lbl_CWD_Title.Name = "lbl_CWD_Title";
+            this.lbl_CWD_Title.Size = new System.Drawing.Size(92, 13);
+            this.lbl_CWD_Title.TabIndex = 15;
+            this.lbl_CWD_Title.Text = "Currrent Directory:";
+            // 
+            // lbl_CWD
+            // 
+            this.lbl_CWD.AutoSize = true;
+            this.lbl_CWD.Location = new System.Drawing.Point(106, 56);
+            this.lbl_CWD.Name = "lbl_CWD";
+            this.lbl_CWD.Size = new System.Drawing.Size(33, 13);
+            this.lbl_CWD.TabIndex = 16;
+            this.lbl_CWD.Text = "None";
             // 
             // frm_LRInstall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 434);
+            this.Controls.Add(this.lbl_CWD);
+            this.Controls.Add(this.lbl_CWD_Title);
+            this.Controls.Add(this.bt_RunCMD);
+            this.Controls.Add(this.lbl_Commandline);
+            this.Controls.Add(this.tb_CommandLine);
             this.Controls.Add(this.lbl_FS_Status);
             this.Controls.Add(this.lbl_FS_Title);
             this.Controls.Add(this.bt_Upload);
@@ -200,5 +254,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label lbl_FS_Title;
         private System.Windows.Forms.Label lbl_FS_Status;
+        private System.Windows.Forms.TextBox tb_CommandLine;
+        private System.Windows.Forms.Label lbl_Commandline;
+        private System.Windows.Forms.Button bt_RunCMD;
+        private System.Windows.Forms.Label lbl_CWD_Title;
+        private System.Windows.Forms.Label lbl_CWD;
     }
 }
