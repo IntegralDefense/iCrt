@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace iCrt_01
@@ -13,6 +7,8 @@ namespace iCrt_01
     public partial class frm_icrt_main : Form
     {
         public string Computername;
+
+        public delegate void InvokeDelegate();
 
         public frm_icrt_main()
         {
@@ -22,34 +18,42 @@ namespace iCrt_01
             bt_Uninstall.Enabled = false;
             bt_Install_Sched.Enabled = false;
             bt_LR_Install.Enabled = false;
+            cb_AgentType.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //Stop clicking the button!
             //button1.Enabled = false;
-
+            tb_Display.Clear();
             rb_Offline.Checked = false;
             rb_Online.Checked = false;
             bt_Install.Enabled = false;
             bt_Install_Sched.Enabled = false;
             tb_Display.Clear();
+            tb_Display.BeginInvoke(new InvokeDelegate(GetInfoBox));
+          
+        }
+
+        public void GetInfoBox()
+        {
             bool Isonline;
             Computername = textBox1.Text;
             //Machine preflight checks is it online?
+
             Isonline = BEFunctions.MachineOnline(Computername);
             if (Isonline == true)
             {
                 tb_Display.AppendText("Machine is online");
                 tb_Display.AppendText(Environment.NewLine);
-                
+
                 if (BEFunctions.canReachPath(Computername))
                 {
                     tb_Display.AppendText("Admin share is accessible");
                     tb_Display.AppendText(Environment.NewLine);
                     rb_Online.Checked = true;
                     bt_Install.Enabled = true;
-                   
+
                 }
                 else
                 {
@@ -72,8 +76,8 @@ namespace iCrt_01
                         tb_Display.AppendText(Environment.NewLine);
                     }
                 }
-                
-                
+
+
                 CBSensor cbSensor = BEFunctions.getCBSensorInfo(Computername);
                 if (!(cbSensor.id == 0))
                 {
@@ -102,7 +106,29 @@ namespace iCrt_01
                 tb_Display.AppendText(Environment.NewLine);
                 rb_Offline.Checked = true;
                 bt_Install_Sched.Enabled = true;
+
+                CBSensor cbSensor = BEFunctions.getCBSensorInfo(Computername);
+                if (!(cbSensor.id == 0))
+                {
+                    tb_Display.AppendText("Carbon Black sensor found on server: " + cbSensor.id);
+                    tb_Display.AppendText(Environment.NewLine);
+                    tb_Display.AppendText("Carbon Black sensor version: " + cbSensor.build_version_string);
+                    tb_Display.AppendText(Environment.NewLine);
+                    tb_Display.AppendText("CB Last check-in:  " + cbSensor.last_checkin_time);
+                    tb_Display.AppendText(Environment.NewLine);
+                    tb_Display.AppendText("CB Client OS:  " + cbSensor.os_environment_display_string);
+                    tb_Display.AppendText(Environment.NewLine);
+                    //bt_ViewFiles.Enabled = true;
+                    bt_LR_Install.Enabled = true;
+                }
+                else
+                {
+                    tb_Display.AppendText("Carbon Black sensor instance not found.");
+                    tb_Display.AppendText(Environment.NewLine);
+                }
+
             }
+        
         }
 
         private void bt_Reset_Click(object sender, EventArgs e)
@@ -128,17 +154,26 @@ namespace iCrt_01
 
         private void bt_Install_Click(object sender, EventArgs e)
         {
-            var commandLine = @"\\" + Computername + @"\admin$\System32\msiexec.exe -i \\" + Computername + @"\c$\tmp\cbsetup.msi /qn";
+            bool server = false;
+            if (cb_AgentType.SelectedIndex == 1)
+            {
+                server = true;
+            }
+
+            var commandLine = @"\\" + Computername + @"\admin$\System32\msiexec.exe -i \\" + Computername + @"\c$\tmp\cbsetup.msi /qn /L*v \\"+ Computername + @"\c$\tmp\cbsetup.log";
+            
             bt_Install.Enabled = false;
-            if (BEFunctions.copyCB(Computername))
+            if (BEFunctions.copyCB(Computername, server))
             {
                 tb_Display.AppendText("CB Package copied.");
                 tb_Display.AppendText(Environment.NewLine);
+                Thread.Sleep(500);
             }
             if (BEFunctions.unZipCB(Computername))
             {
                 tb_Display.AppendText("CB Package unzipped.");
                 tb_Display.AppendText(Environment.NewLine);
+                Thread.Sleep(500);
             }
             var returnval = BEFunctions.installCB(Computername, commandLine);
             if ( returnval != -1)
@@ -186,11 +221,17 @@ namespace iCrt_01
 
         private void bt_LERC_online_Click(object sender, EventArgs e)
         {
+            bool server = false;
+            if (cb_AgentType.SelectedIndex == 1)
+            {
+                server = true;
+            }
+
             var commandLine = @"\\" + Computername + @"\admin$\System32\msiexec.exe -i \\" + Computername + @"\c$\tmp\lercSetup.msi /qn /l lerc_install.log company=2 reconnectdelay=60 chunksize=2048 serverurls=https://control.integraldefense.com/";
             
 
             bt_LERC_online.Enabled = false;
-            if (BEFunctions.copyCB(Computername))
+            if (BEFunctions.copyCB(Computername, server))
             {
                 tb_Display.AppendText("LERC Package copied.");
                 tb_Display.AppendText(Environment.NewLine);

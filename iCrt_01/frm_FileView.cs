@@ -67,12 +67,14 @@ namespace iCrt_01
                     var totalCount = 0;
                     do
                     {
-                        resultCount = await cb.UpdateFilesBatch(filesystem, sensorId, totalCount, 100, cancelSource.Token);
+                        resultCount = await cb.UpdateFilesBatch(filesystem, sensorId, totalCount, 500, cancelSource.Token);
                         if (resultCount < 0)
                         {
                             return;
                         }
                         totalCount += resultCount;
+                        lbl_Counts.Text = totalCount.ToString();
+
                     }
                     while (resultCount > 0);
                     lbl_Counts.Text = totalCount.ToString();

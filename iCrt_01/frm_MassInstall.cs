@@ -22,6 +22,7 @@ namespace iCrt_01
             //bt_Execute.Enabled = false;
             bt_Check.Enabled = false;
             lbl_Total_Count.Text = totalcount.ToString();
+            cb_AgentType.SelectedIndex = 0;
 
         }
 
@@ -55,7 +56,7 @@ namespace iCrt_01
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
-            bt_Execute.Enabled = false;
+            //bt_Execute.Enabled = false;
             bt_Check.Enabled = false;
             bt_Load.Enabled = true;
             totalchecked = 0;
@@ -76,13 +77,13 @@ namespace iCrt_01
                         if (BEFunctions.MachineOnline(row.Cells[0].Value.ToString()))
                         {
                             row.Cells[1].Value = "True";
-                              totalchecked++;
+                              
                              // lbl_Check_Count.Text = totalchecked.ToString();
                           }
                         else
                         {
                             row.Cells[1].Value = "False";
-                              totalchecked++;
+                            totalchecked++;
                              // lbl_Check_Count.Text = totalchecked.ToString();
                         }
                           if (row.Cells[1].Value.ToString() == "True")
@@ -94,16 +95,19 @@ namespace iCrt_01
                               else
                               {
                                   row.Cells[2].Value = "False";
+                                  totalchecked++;
                               }
                               if (row.Cells[2].Value.ToString() == "True")
                               {
                                   if (BEFunctions.isCBInstalled(row.Cells[0].Value.ToString()))
                                   {
                                       row.Cells[3].Value = "True";
+                                      totalchecked++;
                                   }
                                   else
                                   {
                                       row.Cells[3].Value = "False";
+                                      totalchecked++;
                                   }
                               }
                               
@@ -138,8 +142,13 @@ namespace iCrt_01
                         
                         if (row.Cells[2].Value.ToString() == "True")
                         {
+                            bool server = false;
+                            if (cb_AgentType.SelectedIndex == 1)
+                            {
+                                server = true;
+                            }
                             row.Cells[4].Value = "Copying";
-                            BEFunctions.copyCB((row.Cells[0].Value.ToString()));
+                            BEFunctions.copyCB((row.Cells[0].Value.ToString()), server);
                             row.Cells[4].Value = "Unzipping";
                             BEFunctions.unZipCB((row.Cells[0].Value.ToString()));
                             row.Cells[4].Value = "Installing";

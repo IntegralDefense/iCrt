@@ -32,6 +32,11 @@
             this.bt_Load = new System.Windows.Forms.Button();
             this.bt_Clear = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_Hostname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Online = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_AdminShare = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_ClientPresent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_InstallStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bt_Execute = new System.Windows.Forms.Button();
             this.bt_Exit = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -40,11 +45,7 @@
             this.lbl_Total_Count = new System.Windows.Forms.Label();
             this.lbl_Text_Checked = new System.Windows.Forms.Label();
             this.lbl_Check_Count = new System.Windows.Forms.Label();
-            this.dgv_Hostname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Online = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_AdminShare = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_ClientPresent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_InstallStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cb_AgentType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,6 +83,31 @@
             this.dataGridView1.Size = new System.Drawing.Size(539, 540);
             this.dataGridView1.TabIndex = 2;
             // 
+            // dgv_Hostname
+            // 
+            this.dgv_Hostname.HeaderText = "Hostname";
+            this.dgv_Hostname.Name = "dgv_Hostname";
+            // 
+            // dgv_Online
+            // 
+            this.dgv_Online.HeaderText = "Online";
+            this.dgv_Online.Name = "dgv_Online";
+            // 
+            // dgv_AdminShare
+            // 
+            this.dgv_AdminShare.HeaderText = "Admin Share?";
+            this.dgv_AdminShare.Name = "dgv_AdminShare";
+            // 
+            // dgv_ClientPresent
+            // 
+            this.dgv_ClientPresent.HeaderText = "CB Installed?";
+            this.dgv_ClientPresent.Name = "dgv_ClientPresent";
+            // 
+            // dgv_InstallStatus
+            // 
+            this.dgv_InstallStatus.HeaderText = "Install Status";
+            this.dgv_InstallStatus.Name = "dgv_InstallStatus";
+            // 
             // bt_Execute
             // 
             this.bt_Execute.Location = new System.Drawing.Point(203, 602);
@@ -105,12 +131,11 @@
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "csv";
-            this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Comma Separated Values|*.csv|All File|*.*";
             // 
             // bt_Check
             // 
-            this.bt_Check.Location = new System.Drawing.Point(106, 12);
+            this.bt_Check.Location = new System.Drawing.Point(94, 13);
             this.bt_Check.Name = "bt_Check";
             this.bt_Check.Size = new System.Drawing.Size(75, 23);
             this.bt_Check.TabIndex = 5;
@@ -153,36 +178,23 @@
             this.lbl_Check_Count.TabIndex = 9;
             this.lbl_Check_Count.Text = "0";
             // 
-            // dgv_Hostname
+            // cb_AgentType
             // 
-            this.dgv_Hostname.HeaderText = "Hostname";
-            this.dgv_Hostname.Name = "dgv_Hostname";
-            // 
-            // dgv_Online
-            // 
-            this.dgv_Online.HeaderText = "Online";
-            this.dgv_Online.Name = "dgv_Online";
-            // 
-            // dgv_AdminShare
-            // 
-            this.dgv_AdminShare.HeaderText = "Admin Share?";
-            this.dgv_AdminShare.Name = "dgv_AdminShare";
-            // 
-            // dgv_ClientPresent
-            // 
-            this.dgv_ClientPresent.HeaderText = "CB Installed?";
-            this.dgv_ClientPresent.Name = "dgv_ClientPresent";
-            // 
-            // dgv_InstallStatus
-            // 
-            this.dgv_InstallStatus.HeaderText = "Install Status";
-            this.dgv_InstallStatus.Name = "dgv_InstallStatus";
+            this.cb_AgentType.FormattingEnabled = true;
+            this.cb_AgentType.Items.AddRange(new object[] {
+            "Workstation",
+            "Server"});
+            this.cb_AgentType.Location = new System.Drawing.Point(203, 12);
+            this.cb_AgentType.Name = "cb_AgentType";
+            this.cb_AgentType.Size = new System.Drawing.Size(156, 21);
+            this.cb_AgentType.TabIndex = 10;
             // 
             // frm_MassInstall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 637);
+            this.Controls.Add(this.cb_AgentType);
             this.Controls.Add(this.lbl_Check_Count);
             this.Controls.Add(this.lbl_Text_Checked);
             this.Controls.Add(this.lbl_Total_Count);
@@ -220,5 +232,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_AdminShare;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_ClientPresent;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_InstallStatus;
+        private System.Windows.Forms.ComboBox cb_AgentType;
     }
 }

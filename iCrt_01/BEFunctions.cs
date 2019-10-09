@@ -137,14 +137,25 @@ namespace iCrt_01
             return success;
         }
 
-        public static bool copyCB(string ComputerName)
+        public static bool copyCB(string ComputerName, bool Server)
         {
             //Function assumes that preflight checks are met.  Machine is online and the admin share can be reached.
             bool success = false;
             string targetpath = @"\\" + ComputerName + @"\c$\tmp";
-            string sourcepath = iCrt_01.Properties.Resources.CBSourceServer + @"\" + iCrt_01.Properties.Resources.CbfileName;
+            string sourcepath = "";
+            string destfile = "";
 
-            string destfile = System.IO.Path.Combine(targetpath, iCrt_01.Properties.Resources.CbfileName);
+            if (Server == true)
+            {
+                sourcepath = iCrt_01.Properties.Resources.CBSourceServer + @"\" + iCrt_01.Properties.Resources.CbServerfileName;
+                destfile = System.IO.Path.Combine(targetpath, iCrt_01.Properties.Resources.CbfileName);
+            }
+            else
+            {
+                sourcepath = iCrt_01.Properties.Resources.CBSourceServer + @"\" + iCrt_01.Properties.Resources.CbfileName;
+                destfile = System.IO.Path.Combine(targetpath, iCrt_01.Properties.Resources.CbfileName);
+            }
+            
 
             //create tmp folder if it does not exist.
             try
@@ -255,7 +266,7 @@ namespace iCrt_01
         public static int uninstallCB(string ComputerName)
         {
             int returnval = -1;
-            var commandLine = @"\\" + ComputerName + @"\admin$\System32\msiexec.exe /x {6A351232-5472-4290-B5D8-39217F82095B} /qn";
+            var commandLine = @"\\" + ComputerName + @"\admin$\CarbonBlack\uninst.exe /S";
 
 
             try

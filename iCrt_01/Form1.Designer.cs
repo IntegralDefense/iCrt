@@ -34,6 +34,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tb_Display = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_LR_Install = new System.Windows.Forms.Button();
             this.bt_LERC_online = new System.Windows.Forms.Button();
             this.bt_Exit = new System.Windows.Forms.Button();
             this.bt_MassInst = new System.Windows.Forms.Button();
@@ -45,7 +46,7 @@
             this.bt_Install = new System.Windows.Forms.Button();
             this.rb_Online = new System.Windows.Forms.RadioButton();
             this.rb_Offline = new System.Windows.Forms.RadioButton();
-            this.bt_LR_Install = new System.Windows.Forms.Button();
+            this.cb_AgentType = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,6 +87,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cb_AgentType);
             this.groupBox1.Controls.Add(this.bt_LR_Install);
             this.groupBox1.Controls.Add(this.bt_LERC_online);
             this.groupBox1.Controls.Add(this.bt_Exit);
@@ -98,14 +100,24 @@
             this.groupBox1.Controls.Add(this.bt_Install);
             this.groupBox1.Location = new System.Drawing.Point(13, 363);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 135);
+            this.groupBox1.Size = new System.Drawing.Size(336, 163);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Client Functions";
             // 
+            // bt_LR_Install
+            // 
+            this.bt_LR_Install.Location = new System.Drawing.Point(213, 105);
+            this.bt_LR_Install.Name = "bt_LR_Install";
+            this.bt_LR_Install.Size = new System.Drawing.Size(117, 23);
+            this.bt_LR_Install.TabIndex = 9;
+            this.bt_LR_Install.Text = "LR Features";
+            this.bt_LR_Install.UseVisualStyleBackColor = true;
+            this.bt_LR_Install.Click += new System.EventHandler(this.bt_LR_Install_Click);
+            // 
             // bt_LERC_online
             // 
-            this.bt_LERC_online.Location = new System.Drawing.Point(7, 77);
+            this.bt_LERC_online.Location = new System.Drawing.Point(7, 105);
             this.bt_LERC_online.Name = "bt_LERC_online";
             this.bt_LERC_online.Size = new System.Drawing.Size(117, 23);
             this.bt_LERC_online.TabIndex = 8;
@@ -115,7 +127,7 @@
             // 
             // bt_Exit
             // 
-            this.bt_Exit.Location = new System.Drawing.Point(213, 106);
+            this.bt_Exit.Location = new System.Drawing.Point(213, 134);
             this.bt_Exit.Name = "bt_Exit";
             this.bt_Exit.Size = new System.Drawing.Size(75, 23);
             this.bt_Exit.TabIndex = 7;
@@ -125,7 +137,7 @@
             // 
             // bt_MassInst
             // 
-            this.bt_MassInst.Location = new System.Drawing.Point(130, 77);
+            this.bt_MassInst.Location = new System.Drawing.Point(130, 105);
             this.bt_MassInst.Name = "bt_MassInst";
             this.bt_MassInst.Size = new System.Drawing.Size(75, 23);
             this.bt_MassInst.TabIndex = 6;
@@ -135,7 +147,7 @@
             // 
             // bt_Lerc_Offline
             // 
-            this.bt_Lerc_Offline.Location = new System.Drawing.Point(213, 49);
+            this.bt_Lerc_Offline.Location = new System.Drawing.Point(213, 77);
             this.bt_Lerc_Offline.Name = "bt_Lerc_Offline";
             this.bt_Lerc_Offline.Size = new System.Drawing.Size(117, 23);
             this.bt_Lerc_Offline.TabIndex = 5;
@@ -145,7 +157,7 @@
             // 
             // bt_Uninstall
             // 
-            this.bt_Uninstall.Location = new System.Drawing.Point(7, 49);
+            this.bt_Uninstall.Location = new System.Drawing.Point(7, 77);
             this.bt_Uninstall.Name = "bt_Uninstall";
             this.bt_Uninstall.Size = new System.Drawing.Size(117, 23);
             this.bt_Uninstall.TabIndex = 4;
@@ -155,7 +167,7 @@
             // 
             // bt_Install_Sched
             // 
-            this.bt_Install_Sched.Location = new System.Drawing.Point(213, 20);
+            this.bt_Install_Sched.Location = new System.Drawing.Point(211, 48);
             this.bt_Install_Sched.Name = "bt_Install_Sched";
             this.bt_Install_Sched.Size = new System.Drawing.Size(117, 23);
             this.bt_Install_Sched.TabIndex = 3;
@@ -165,7 +177,7 @@
             // 
             // bt_ViewFiles
             // 
-            this.bt_ViewFiles.Location = new System.Drawing.Point(130, 20);
+            this.bt_ViewFiles.Location = new System.Drawing.Point(130, 48);
             this.bt_ViewFiles.Name = "bt_ViewFiles";
             this.bt_ViewFiles.Size = new System.Drawing.Size(75, 23);
             this.bt_ViewFiles.TabIndex = 2;
@@ -175,7 +187,7 @@
             // 
             // bt_Reset
             // 
-            this.bt_Reset.Location = new System.Drawing.Point(49, 106);
+            this.bt_Reset.Location = new System.Drawing.Point(49, 134);
             this.bt_Reset.Name = "bt_Reset";
             this.bt_Reset.Size = new System.Drawing.Size(75, 23);
             this.bt_Reset.TabIndex = 1;
@@ -185,7 +197,7 @@
             // 
             // bt_Install
             // 
-            this.bt_Install.Location = new System.Drawing.Point(7, 20);
+            this.bt_Install.Location = new System.Drawing.Point(7, 48);
             this.bt_Install.Name = "bt_Install";
             this.bt_Install.Size = new System.Drawing.Size(117, 23);
             this.bt_Install.TabIndex = 0;
@@ -217,21 +229,22 @@
             this.rb_Offline.Text = "Offline";
             this.rb_Offline.UseVisualStyleBackColor = true;
             // 
-            // bt_LR_Install
+            // cb_AgentType
             // 
-            this.bt_LR_Install.Location = new System.Drawing.Point(213, 77);
-            this.bt_LR_Install.Name = "bt_LR_Install";
-            this.bt_LR_Install.Size = new System.Drawing.Size(117, 23);
-            this.bt_LR_Install.TabIndex = 9;
-            this.bt_LR_Install.Text = "LR Features";
-            this.bt_LR_Install.UseVisualStyleBackColor = true;
-            this.bt_LR_Install.Click += new System.EventHandler(this.bt_LR_Install_Click);
+            this.cb_AgentType.FormattingEnabled = true;
+            this.cb_AgentType.Items.AddRange(new object[] {
+            "Workstation",
+            "Server"});
+            this.cb_AgentType.Location = new System.Drawing.Point(95, 19);
+            this.cb_AgentType.Name = "cb_AgentType";
+            this.cb_AgentType.Size = new System.Drawing.Size(156, 21);
+            this.cb_AgentType.TabIndex = 11;
             // 
             // frm_icrt_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 510);
+            this.ClientSize = new System.Drawing.Size(361, 538);
             this.Controls.Add(this.rb_Offline);
             this.Controls.Add(this.rb_Online);
             this.Controls.Add(this.groupBox1);
@@ -269,6 +282,7 @@
         private System.Windows.Forms.Button bt_Exit;
         private System.Windows.Forms.Button bt_LERC_online;
         private System.Windows.Forms.Button bt_LR_Install;
+        private System.Windows.Forms.ComboBox cb_AgentType;
     }
 }
 

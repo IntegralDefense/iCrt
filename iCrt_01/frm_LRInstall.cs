@@ -50,15 +50,16 @@ namespace iCrt_01
             LRSession.sensor_id = sensorID;
             var client = new RestClient(iCrt_01.Properties.Resources.CBMasServer);
             var request = new RestRequest(Method.POST);
+
+            lbl_LR_Status.Text = "Attempting to connect.  Please wait. ";
             
             request.AddHeader("X-Auth-Token", iCrt_01.Properties.Resources.CBApiKey);
             request.Resource = "/v1/cblr/session";
             request.RequestFormat = DataFormat.Json;
             request.AddBody(LRSession);
             
-
             //We'll loop this portion until we get the session status of active back.  This could take a bit as in some environments there are a lot 
-            // of old sessions.  Not sure when CB does the old session clean up. 
+            //of old sessions.  Not sure when CB does the old session clean up. 
             while (status != "active") { 
                 var response = client.Execute<List<CBLRItem>>(request);
                 try
